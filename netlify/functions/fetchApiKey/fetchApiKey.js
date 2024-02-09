@@ -15,3 +15,4 @@ const handler = async (event) => {
 }
 
 module.exports = { handler }
+// https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey

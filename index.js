@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
-
+/*
 //import { process } from './env'
 
 // Importa la libreria OpenAI
@@ -9,7 +9,7 @@ import OpenAI from "openai";
 // Inizializza l'API di OpenAI con la configurazione
 
 const openai = new OpenAI({ apiKey :process.env.OPENAI_API_KEY, dangerouslyAllowBrowser: true });
-
+*/
 const appSettings = {
     databaseURL: 'https://freddy-openai-default-rtdb.europe-west1.firebasedatabase.app/'
 }
@@ -21,6 +21,7 @@ const database = getDatabase(app)
 const conversationInDb = ref(database)
 
 const chatbotConversation = document.getElementById('chatbot-conversation')
+let conversationStr = ''
 
 const instructionObj = {
     role: 'system',
@@ -33,6 +34,7 @@ const instructionObj = {
 document.addEventListener('submit', (e) => {
     e.preventDefault()
     const userInput = document.getElementById('user-input')
+    conversationStr += ` ${userInput.value}`
     push(conversationInDb, {
         role: 'user',
         content: userInput.value
@@ -47,7 +49,18 @@ document.addEventListener('submit', (e) => {
     chatbotConversation.scrollTop = chatbotConversation.scrollHeight
 })
 
-function fetchReply() {
+async function fetchReply() {
+    const url = 'https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey'
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'text/plain',
+        },
+        body: conversationStr
+    })
+    const data = await response.json()
+    console.log(data)
+/*
     get(conversationInDb).then(async (snapshot) => {
         if (snapshot.exists()) {
             const conversationArr = Object.values(snapshot.val())
@@ -60,14 +73,15 @@ function fetchReply() {
                 frequency_penalty: 0.3
             })
             
-            push(conversationInDb, response.choices[0].message)
-            renderTypewriterText(response.choices[0].message.content)
+            //push(conversationInDb, response.choices[0].message)
+            //renderTypewriterText(response.choices[0].message.content)
         }
         else {
             console.log('No data available')
         }
 
     })
+    */
 }
 
 function renderTypewriterText(text) {
