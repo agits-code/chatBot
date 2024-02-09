@@ -55,6 +55,9 @@ async function fetchReply() {
         method: 'POST',
         headers: {
             "Access-Control-Allow-Origin": "*", // Questo permette l'accesso da qualsiasi origine
+            // Per una maggiore sicurezza, sostituisci "*" con l'origine specifica che vuoi permettere, es. "http://localhost:5173"
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
             'content-type': 'text/plain',
         },
         body: conversationStr
