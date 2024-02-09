@@ -53,7 +53,6 @@ async function fetchReply() {
     const url = 'https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey'
     const response = await fetch(url, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
             "Access-Control-Allow-Origin": "*", // Questo permette l'accesso da qualsiasi origine
             'content-type': 'text/plain',
