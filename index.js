@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
-/*
+
 //import { process } from './env'
 
 // Importa la libreria OpenAI
@@ -9,7 +9,7 @@ import OpenAI from "openai";
 // Inizializza l'API di OpenAI con la configurazione
 
 const openai = new OpenAI({ apiKey :process.env.OPENAI_API_KEY, dangerouslyAllowBrowser: true });
-*/
+
 const appSettings = {
     databaseURL: 'https://freddy-openai-default-rtdb.europe-west1.firebasedatabase.app/'
 }
@@ -50,6 +50,7 @@ document.addEventListener('submit', (e) => {
 })
 
 async function fetchReply() {
+    /*
     const url = 'https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey'
     const response = await fetch(url, {
         method: 'POST',
@@ -64,7 +65,8 @@ async function fetchReply() {
     })
     const data = await response.json()
     console.log(data)
-/*
+    */
+
     get(conversationInDb).then(async (snapshot) => {
         if (snapshot.exists()) {
             const conversationArr = Object.values(snapshot.val())
@@ -77,15 +79,15 @@ async function fetchReply() {
                 frequency_penalty: 0.3
             })
             
-            //push(conversationInDb, response.choices[0].message)
-            //renderTypewriterText(response.choices[0].message.content)
+            push(conversationInDb, response.choices[0].message)
+            renderTypewriterText(response.choices[0].message.content)
         }
         else {
             console.log('No data available')
         }
 
     })
-    */
+    
 }
 
 function renderTypewriterText(text) {
