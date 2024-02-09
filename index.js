@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
-import { process } from './env'
+//import { process } from './env'
 
 // Importa la libreria OpenAI
 import OpenAI from "openai";
