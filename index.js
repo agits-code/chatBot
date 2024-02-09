@@ -55,6 +55,7 @@ async function fetchReply() {
         method: 'POST',
         mode: 'cors',
         headers: {
+            "Access-Control-Allow-Origin": "*", // Questo permette l'accesso da qualsiasi origine
             'content-type': 'text/plain',
         },
         body: conversationStr
