@@ -21,7 +21,7 @@ const database = getDatabase(app)
 const conversationInDb = ref(database)
 
 const chatbotConversation = document.getElementById('chatbot-conversation')
-let conversationStr = ''
+//let conversationStr = ''
 
 const instructionObj = {
     role: 'system',
@@ -40,7 +40,7 @@ document.addEventListener('submit', (e) => {
         content: userInput.value
     })
     fetchReply()
-    console.log(conversationArr)
+    //console.log(conversationArr)
     const newSpeechBubble = document.createElement('div')
     newSpeechBubble.classList.add('speech', 'speech-human')
     chatbotConversation.appendChild(newSpeechBubble)
@@ -51,22 +51,8 @@ document.addEventListener('submit', (e) => {
 
 
 async function fetchReply() {
-    const url = 'https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey'
-
-     // Esegui la richiesta fetch e attendi la risposta
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-               
-                'content-type': 'text/plain',
-            },
-            body: conversationStr
-        })
-    const data = await response.json()
-    console.log(data)    
      
-
-    get(conversationInDb).then(async (snapshot) => {
+     get(conversationInDb).then(async (snapshot) => {
         if (snapshot.exists()) {
             const conversationArr = Object.values(snapshot.val())
            
@@ -79,6 +65,19 @@ async function fetchReply() {
                 frequency_penalty: 0.3
             })
             */
+            const url = 'https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey'
+
+           // Esegui la richiesta fetch e attendi la risposta
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+               
+                    'content-type': 'text/plain',
+                },
+                body: conversationArr
+            })
+            const data = await response.json()
+            console.log(data)  
             
            // push(conversationInDb, response.choices[0].message)
            // renderTypewriterText(response.choices[0].message.content)
