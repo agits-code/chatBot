@@ -24,6 +24,9 @@ const handler = async (event) => {
    });
     
   console.log(response)
+  const messageContent = response.choices[0].message.content;
+  console.log(messageContent);
+
     return {
       statusCode: 200,
       body: JSON.stringify({ reply: response.data }),
