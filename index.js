@@ -34,13 +34,13 @@ const instructionObj = {
 document.addEventListener('submit', (e) => {
     e.preventDefault()
     const userInput = document.getElementById('user-input')
-    conversationStr += ` ${userInput.value}`
+    //conversationStr += ` ${userInput.value}`
     push(conversationInDb, {
         role: 'user',
         content: userInput.value
     })
     fetchReply()
-    //console.log(conversationArr)
+    console.log(conversationArr)
     const newSpeechBubble = document.createElement('div')
     newSpeechBubble.classList.add('speech', 'speech-human')
     chatbotConversation.appendChild(newSpeechBubble)
