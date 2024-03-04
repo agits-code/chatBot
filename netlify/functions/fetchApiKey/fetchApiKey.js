@@ -8,7 +8,7 @@ const openai = new OpenAI({ apiKey :process.env.OPENAI_API_KEY });
 const handler = async (event) => {
   try {
 
-   
+   console.log(event.body)
 
     //const subject = event.queryStringParameters.name || 'World'
    // Assicurati che il body della richiesta sia parsato correttamente
