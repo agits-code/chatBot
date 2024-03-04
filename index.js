@@ -67,17 +67,15 @@ async function fetchReply() {
             */
             const url = 'https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey'
 
-           // Esegui la richiesta fetch e attendi la risposta
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
-               
-                    'content-type': 'text/plain',
+                    'Content-Type': 'application/json', // Usa 'application/json'
                 },
-                body: conversationArr
-            })
-            const data = await response.json()
-            console.log(data)  
+                body: JSON.stringify({messages: conversationArr}) // Stringifica e usa un oggetto per il corpo
+            });
+            const data = await response.json();
+            console.log(data);
             
            // push(conversationInDb, response.choices[0].message)
            // renderTypewriterText(response.choices[0].message.content)
