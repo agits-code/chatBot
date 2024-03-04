@@ -77,8 +77,8 @@ async function fetchReply() {
             const data = await response.json();
             console.log(data);
             
-           // push(conversationInDb, response.choices[0].message)
-           // renderTypewriterText(response.choices[0].message.content)
+            push(conversationInDb, data.reply)
+            renderTypewriterText(data.reply.content)
         }
         else {
             console.log('No data available')
