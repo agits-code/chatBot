@@ -8,12 +8,7 @@ const openai = new OpenAI({ apiKey :process.env.OPENAI_API_KEY });
 const handler = async (event) => {
   try {
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: event.body,
-      presence_penalty: 0,
-      frequency_penalty: 0.3
-    })
+   
 
     const subject = event.queryStringParameters.name || 'World'
     
