@@ -75,7 +75,7 @@ async function fetchReply() {
                 body: JSON.stringify({messages: conversationArr}) // Stringifica e usa un oggetto per il corpo
             });
             const data = await response.json();
-            //console.log(data);
+            console.log(data);
             
            // push(conversationInDb, response.choices[0].message)
            // renderTypewriterText(response.choices[0].message.content)
