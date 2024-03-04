@@ -10,12 +10,18 @@ const handler = async (event) => {
 
    
 
-    const subject = event.queryStringParameters.name || 'World'
+    //const subject = event.queryStringParameters.name || 'World'
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4',
+      messages: event.body,
+      presence_penalty: 0,
+      frequency_penalty: 0.3
+  })
     
   
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
+      body: JSON.stringify({ reply: response.data }),
       
     }
   } catch (error) {
