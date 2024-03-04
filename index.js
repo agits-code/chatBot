@@ -1,15 +1,15 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
-import { process } from './env'
-
+//import { process } from './env'
+/*
 // Importa la libreria OpenAI
 import OpenAI from "openai";
 
 // Inizializza l'API di OpenAI con la configurazione
 
 const openai = new OpenAI({ apiKey :process.env.OPENAI_API_KEY, dangerouslyAllowBrowser: true });
-
+*/
 const appSettings = {
     databaseURL: 'https://freddy-openai-default-rtdb.europe-west1.firebasedatabase.app/'
 }
@@ -49,38 +49,39 @@ document.addEventListener('submit', (e) => {
     chatbotConversation.scrollTop = chatbotConversation.scrollHeight
 })
 
+
 async function fetchReply() {
-    /*
     const url = 'https://chat-bot-test-openai.netlify.app/.netlify/functions/fetchApiKey'
+
+     // Esegui la richiesta fetch e attendi la risposta
     const response = await fetch(url, {
         method: 'POST',
         headers: {
-            "Access-Control-Allow-Origin": "*", // Questo permette l'accesso da qualsiasi origine
-            // Per una maggiore sicurezza, sostituisci "*" con l'origine specifica che vuoi permettere, es. "http://localhost:5173"
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-            'content-type': 'text/plain',
-        },
-        body: conversationStr
-    })
+               
+                'content-type': 'text/plain',
+            },
+            body: conversationStr
+        })
     const data = await response.json()
-    console.log(data)
-    */
+    console.log(data)    
+     
 
     get(conversationInDb).then(async (snapshot) => {
         if (snapshot.exists()) {
             const conversationArr = Object.values(snapshot.val())
            
             conversationArr.unshift(instructionObj)
+            /*
             const response = await openai.chat.completions.create({
                 model: 'gpt-4',
                 messages: conversationArr,
                 presence_penalty: 0,
                 frequency_penalty: 0.3
             })
+            */
             
-            push(conversationInDb, response.choices[0].message)
-            renderTypewriterText(response.choices[0].message.content)
+           // push(conversationInDb, response.choices[0].message)
+           // renderTypewriterText(response.choices[0].message.content)
         }
         else {
             console.log('No data available')

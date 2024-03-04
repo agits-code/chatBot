@@ -1,7 +1,20 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
+// Importa la libreria OpenAI
+import OpenAI from "openai";
+
+// Inizializza l'API di OpenAI con la configurazione
+
+const openai = new OpenAI({ apiKey :process.env.OPENAI_API_KEY });
 
 const handler = async (event) => {
   try {
+
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4',
+      messages: event.body,
+      presence_penalty: 0,
+      frequency_penalty: 0.3
+    })
+
     const subject = event.queryStringParameters.name || 'World'
     
   
