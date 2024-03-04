@@ -12,9 +12,9 @@ const handler = async (event) => {
 
     //const subject = event.queryStringParameters.name || 'World'
    // Assicurati che il body della richiesta sia parsato correttamente
-   const body = JSON.parse(event.body);
+   //const body = JSON.parse(event.body);
    // Adatta questa linea in base alla struttura dei tuoi dati
-   const messages = body.messages; 
+   const messages = event.body.messages; 
 
    const response = await openai.chat.completions.create({
      model: 'gpt-4',
@@ -23,7 +23,7 @@ const handler = async (event) => {
      frequency_penalty: 0.3
    });
     
-  //console.log(response.data)
+  console.log(response)
     return {
       statusCode: 200,
       body: JSON.stringify({ reply: response.data }),
