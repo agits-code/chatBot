@@ -12,10 +12,10 @@ const handler = async (event) => {
 
     //const subject = event.queryStringParameters.name || 'World'
    // Assicurati che il body della richiesta sia parsato correttamente
-   //const body = JSON.parse(event.body);
+   const body = JSON.parse(event.body);
    // Adatta questa linea in base alla struttura dei tuoi dati
-   const messages = event.body.messages; 
-
+   const messages = body.messages; 
+   console.log(messages)
    const response = await openai.chat.completions.create({
      model: 'gpt-4',
      messages: messages,
