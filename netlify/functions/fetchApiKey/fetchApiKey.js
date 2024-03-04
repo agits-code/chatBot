@@ -23,7 +23,7 @@ const handler = async (event) => {
      frequency_penalty: 0.3
    });
     
-  console.log(response.data)
+  //console.log(response.data)
     return {
       statusCode: 200,
       body: JSON.stringify({ reply: response.data }),
